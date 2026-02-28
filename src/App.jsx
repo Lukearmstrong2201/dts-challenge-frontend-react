@@ -4,8 +4,9 @@ import "./styles/styles.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
 
-  // Ensures only renders once
+  // Ensures only renders on dependency change
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -19,9 +20,33 @@ function App() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (newTask.trim() === "") return;
+
+    const tempTask = {
+      id: Date.now(),
+      title: newTask,
+    };
+
+    setTasks([...tasks, tempTask]);
+    setNewTask("");
+  };
+
   return (
     <div className="container">
       <h1>Task Manager</h1>
+
+      <form onSubmit={handleSubmit} className="task-form">
+        <input
+          type="text"
+          placeholder="Enter a new task..."
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button type="submit">Add</button>
+      </form>
 
       {tasks.length === 0 ? (
         <p>No tasks found.</p>
