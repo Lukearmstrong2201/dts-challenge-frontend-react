@@ -5,6 +5,7 @@ import "./styles/styles.css";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   // Ensures only renders on dependency change
   useEffect(() => {
@@ -23,7 +24,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (newTask.trim() === "") return;
+    if (!newTask.trim() || !dueDate) return;
 
     try {
       const createdTask = await createTask({
@@ -35,6 +36,7 @@ function App() {
 
       setTasks([...tasks, createdTask]);
       setNewTask("");
+      setDueDate("");
     } catch (error) {
       console.error("Failed to create task:", error);
     }
@@ -50,6 +52,14 @@ function App() {
           placeholder="Enter a new task..."
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
+          required
+        />
+
+        <input
+          type="datetime-local"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          required
         />
         <button type="submit">Add</button>
       </form>
