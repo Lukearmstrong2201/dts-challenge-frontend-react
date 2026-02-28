@@ -1,0 +1,55 @@
+/* Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+}
+
+/* Main container */
+.container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px lightgray;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: black;
+  letter-spacing: 1px;
+}
+
+/* Task list */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual task */
+li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  background-color: lightgray;
+  border-radius: 6px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+  cursor: pointer;
+}
+
+/* Hover effect */
+li:hover {
+  background-color: silver;
+  transform: translateY(-2px);
+}
+
+/* Empty message */
+p {
+  text-align: center;
+  color: gray;
+}
