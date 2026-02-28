@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTasks } from "./api/tasks";
+import { getTasks, createTask } from "./api/tasks";
 import "./styles/styles.css";
 
 function App() {
@@ -20,18 +20,24 @@ function App() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (newTask.trim() === "") return;
 
-    const tempTask = {
-      id: Date.now(),
-      title: newTask,
-    };
+    try {
+      const createdTask = await createTask({
+        title: newTask,
+        description: null,
+        status: "pending",
+        due_date: new Date().toISOString(),
+      });
 
-    setTasks([...tasks, tempTask]);
-    setNewTask("");
+      setTasks([...tasks, createdTask]);
+      setNewTask("");
+    } catch (error) {
+      console.error("Failed to create task:", error);
+    }
   };
 
   return (
