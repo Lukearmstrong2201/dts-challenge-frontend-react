@@ -69,7 +69,11 @@ function App() {
       ) : (
         <ul>
           {tasks.map((task) => (
-            <li key={task.id}>{task.title}</li>
+            <li key={task.id}>
+              <strong>{task.title}</strong>
+              <br />
+              <small>Due: {new Date(task.due_date).toLocaleString()}</small>
+            </li>
           ))}
         </ul>
       )}
