@@ -8,8 +8,6 @@ The backend must be running locally for the frontend to function correctly.
 
 ## Project Setup
 
-Both repositories should be located inside the same shared parent folder: dts-challenge-projects
-
 The frontend communicates with the backend via REST API.
 
 ---
