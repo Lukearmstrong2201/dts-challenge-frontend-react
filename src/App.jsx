@@ -12,6 +12,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [description, setDescription] = useState("");
 
   // Ensures only renders on dependency change
   useEffect(() => {
@@ -35,7 +36,7 @@ function App() {
     try {
       const createdTask = await createTask({
         title: newTask,
-        description: null,
+        description: description || null,
         status: "pending",
         due_date: new Date().toISOString(),
       });
@@ -84,6 +85,13 @@ function App() {
         />
 
         <input
+          type="text"
+          placeholder="Description (optional)"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <input
           type="datetime-local"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
@@ -100,6 +108,10 @@ function App() {
             <li key={task.id}>
               <strong>{task.title}</strong>
               <br />
+
+              {task.description && <small>{task.description}</small>}
+              <br />
+
               <select
                 value={task.status}
                 onChange={(e) => handleStatusChange(task.id, e.target.value)}
