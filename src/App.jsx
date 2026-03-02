@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTasks, createTask } from "./api/tasks";
+import { getTasks, createTask, updateTaskStatus } from "./api/tasks";
 import "./styles/styles.css";
 
 function App() {
@@ -42,6 +42,18 @@ function App() {
     }
   };
 
+  const handleStatusChange = async (taskId, newStatus) => {
+    try {
+      const updatedTask = await updateTaskStatus(taskId, newStatus);
+
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task.id === taskId ? updatedTask : task)),
+      );
+    } catch (error) {
+      console.error("Failed to update status:", error);
+    }
+  };
+
   return (
     <div className="container">
       <h1>Task Manager</h1>
@@ -71,6 +83,15 @@ function App() {
           {tasks.map((task) => (
             <li key={task.id}>
               <strong>{task.title}</strong>
+              <br />
+              <select
+                value={task.status}
+                onChange={(e) => handleStatusChange(task.id, e.target.value)}
+              >
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
               <br />
               <small>Status: {task.status}</small>
               <br />

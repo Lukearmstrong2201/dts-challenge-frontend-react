@@ -12,3 +12,11 @@ export const createTask = async (taskData) => {
   const response = await axios.post(`${API_URL}/tasks`, taskData);
   return response.data;
 };
+
+export const updateTaskStatus = async (taskId, status) => {
+  const response = await axios.patch(`${API_URL}/tasks/${taskId}/status`, {
+    status,
+  });
+
+  return response.data;
+};
