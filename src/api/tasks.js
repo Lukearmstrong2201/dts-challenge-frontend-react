@@ -20,3 +20,7 @@ export const updateTaskStatus = async (taskId, status) => {
 
   return response.data;
 };
+
+export const deleteTask = async (taskId) => {
+  await axios.delete(`${API_URL}/tasks/${taskId}`);
+};

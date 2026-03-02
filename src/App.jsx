@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { getTasks, createTask, updateTaskStatus } from "./api/tasks";
+import {
+  getTasks,
+  createTask,
+  updateTaskStatus,
+  deleteTask,
+} from "./api/tasks";
+
 import "./styles/styles.css";
 
 function App() {
@@ -54,6 +60,16 @@ function App() {
     }
   };
 
+  const handleDelete = async (taskId) => {
+    try {
+      await deleteTask(taskId);
+
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+    } catch (error) {
+      console.error("Failed to delete task:", error);
+    }
+  };
+
   return (
     <div className="container">
       <h1>Task Manager</h1>
@@ -96,6 +112,14 @@ function App() {
               <small>Status: {task.status}</small>
               <br />
               <small>Due: {new Date(task.due_date).toLocaleString()}</small>
+              <br />
+
+              <button
+                onClick={() => handleDelete(task.id)}
+                className="delete-btn"
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
