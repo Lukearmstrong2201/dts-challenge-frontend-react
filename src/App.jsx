@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import TaskItem from "./components/TaskItem";
+import TaskForm from "./components/TaskForm";
 import {
   getTasks,
   createTask,
@@ -75,70 +77,27 @@ function App() {
     <div className="container">
       <h1>Task Manager</h1>
 
-      <form onSubmit={handleSubmit} className="task-form">
-        <input
-          type="text"
-          placeholder="Enter a new task..."
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder="Description (optional)"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-
-        <input
-          type="datetime-local"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-          required
-        />
-        <button type="submit">Add</button>
-      </form>
+      <TaskForm
+        newTask={newTask}
+        description={description}
+        dueDate={dueDate}
+        setNewTask={setNewTask}
+        setDescription={setDescription}
+        setDueDate={setDueDate}
+        onSubmit={handleSubmit}
+      />
 
       {tasks.length === 0 ? (
         <p>No tasks found.</p>
       ) : (
         <ul>
           {tasks.map((task) => (
-            <li key={task.id} className="task-item">
-              <div className="task-header">
-                <span>
-                  <strong className="task-title">{task.title}</strong>
-                </span>
-                <button
-                  onClick={() => handleDelete(task.id)}
-                  className="delete-btn"
-                >
-                  Delete
-                </button>
-              </div>
-
-              {task.description && (
-                <small className="task-description">{task.description}</small>
-              )}
-              <br />
-              <div className="task-meta">
-                <select
-                  value={task.status}
-                  onChange={(e) => handleStatusChange(task.id, e.target.value)}
-                >
-                  <option value="pending">Pending</option>
-                  <option value="in_progress">In Progress</option>
-                  <option value="completed">Completed</option>
-                </select>
-              </div>
-
-              <br />
-              <small>Status: {task.status}</small>
-              <br />
-              <small>Due: {new Date(task.due_date).toLocaleString()}</small>
-              <br />
-            </li>
+            <TaskItem
+              key={task.id}
+              task={task}
+              onDelete={handleDelete}
+              onStatusChange={handleStatusChange}
+            />
           ))}
         </ul>
       )}
