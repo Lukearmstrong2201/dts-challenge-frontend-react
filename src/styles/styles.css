@@ -42,10 +42,41 @@ li {
   cursor: pointer;
 }
 
+.task-item {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-title {
+  font-weight: 600;
+}
+
+.task-description {
+  display: block;
+  margin-top: 6px;
+  color: #555;
+}
+
+.task-meta {
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* Hover effect */
 li:hover {
-  background-color: silver;
-  transform: translateY(-2px);
+  background-color: whitesmoke;
 }
 
 li strong {
@@ -55,7 +86,7 @@ li strong {
 li small {
   display: block;
   margin-top: 4px;
-  color: dimgray;
+  color: black;
   font-size: 12px;
 }
 
@@ -64,6 +95,8 @@ p {
   text-align: center;
   color: gray;
 }
+
+/* Delet button*/
 
 .delete-btn {
   margin-top: 8px;
@@ -79,4 +112,40 @@ p {
 
 .delete-btn:hover {
   background-color: red;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+/* inputs */
+input,
+textarea,
+select {
+  background-color: rgb(188, 188, 188);
+  color: black;
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  border: 1px solid white;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Submit button*/
+button[type="submit"] {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: blue;
 }

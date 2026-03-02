@@ -105,33 +105,39 @@ function App() {
       ) : (
         <ul>
           {tasks.map((task) => (
-            <li key={task.id}>
-              <strong>{task.title}</strong>
-              <br />
+            <li key={task.id} className="task-item">
+              <div className="task-header">
+                <span>
+                  <strong className="task-title">{task.title}</strong>
+                </span>
+                <button
+                  onClick={() => handleDelete(task.id)}
+                  className="delete-btn"
+                >
+                  Delete
+                </button>
+              </div>
 
-              {task.description && <small>{task.description}</small>}
+              {task.description && (
+                <small className="task-description">{task.description}</small>
+              )}
               <br />
+              <div className="task-meta">
+                <select
+                  value={task.status}
+                  onChange={(e) => handleStatusChange(task.id, e.target.value)}
+                >
+                  <option value="pending">Pending</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
 
-              <select
-                value={task.status}
-                onChange={(e) => handleStatusChange(task.id, e.target.value)}
-              >
-                <option value="pending">Pending</option>
-                <option value="in_progress">In Progress</option>
-                <option value="completed">Completed</option>
-              </select>
               <br />
               <small>Status: {task.status}</small>
               <br />
               <small>Due: {new Date(task.due_date).toLocaleString()}</small>
               <br />
-
-              <button
-                onClick={() => handleDelete(task.id)}
-                className="delete-btn"
-              >
-                Delete
-              </button>
             </li>
           ))}
         </ul>
