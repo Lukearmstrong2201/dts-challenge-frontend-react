@@ -72,6 +72,8 @@ function App() {
             <li key={task.id}>
               <strong>{task.title}</strong>
               <br />
+              <small>Status: {task.status}</small>
+              <br />
               <small>Due: {new Date(task.due_date).toLocaleString()}</small>
             </li>
           ))}
